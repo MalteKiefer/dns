@@ -1,8 +1,11 @@
+// Registrar is managed outside of DNSControl, so use the built-in no-op registrar.
 var REG_INWX = NewRegistrar("none");
+// DNS records are hosted at deSEC.
 var DSP_DESEC = NewDnsProvider("desec");
 
 var DOMAIN = "kiefer-networks.de";
 
+// Server addresses.
 var IP4_WEB  = "152.53.102.158";
 var IP6_WEB  = "2a0a:4cc0:80:23ca:18b7:e0ff:fe0b:ef74";
 var IP4_MAIL = "152.53.156.62";
@@ -29,7 +32,7 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     CNAME("autoconfig", "mail." + DOMAIN + "."),
     CNAME("autodiscover", "mail." + DOMAIN + "."),
 
-    // MTA-STS Policy-Host
+    // MTA-STS policy host
     A("mta-sts", IP4_MAIL),
     AAAA("mta-sts", IP6_MAIL),
 

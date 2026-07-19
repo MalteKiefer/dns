@@ -1,53 +1,72 @@
 name: DNS Deploy
 
+# Preview on every change, push to deSEC only after a merge to main.
 on:
   push:
     branches: [main]
     paths:
       - 'dnsconfig.js'
       - 'creds.json'
+      - '.github/workflows/dns.yml'
   pull_request:
     branches: [main]
     paths:
       - 'dnsconfig.js'
       - 'creds.json'
+      - '.github/workflows/dns.yml'
   workflow_dispatch:
 
+# Never run two deployments at once, and never cancel one mid-flight.
 concurrency:
   group: dns-deploy
   cancel-in-progress: false
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
+  # Validate the config and show the diff without touching the live zone.
   preview:
     runs-on: ubuntu-latest
-    container:
-      image: stackexchange/dnscontrol:latest
     env:
       DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Install dnscontrol
+        run: |
+          go install github.com/StackExchange/dnscontrol/v4@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
       - name: Check syntax
         run: dnscontrol check
 
-      - name: Preview
+      - name: Preview changes
         run: dnscontrol preview
 
+  # Apply the changes to the live zone. Runs only after a push to main.
   push:
     needs: preview
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment: production
-    container:
-      image: stackexchange/dnscontrol:latest
     env:
       DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Push
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Install dnscontrol
+        run: |
+          go install github.com/StackExchange/dnscontrol/v4@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+      - name: Push changes
         run: dnscontrol push
