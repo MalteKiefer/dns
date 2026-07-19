@@ -107,12 +107,13 @@ D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("www", "84.200.227.133"),
     AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
-    // Microsoft 365 domain verification
+    // Microsoft 365 domain verification.
+    // The @ TXT RRset shares one TTL, so keep the SPF record at 3600 too.
     TXT("@", "MS=ms27590614", TTL(3600)),
 
     // No mail: reject and block spoofing of this non-sending domain.
     MX("@", 0, "."),
-    TXT("@", "v=spf1 -all"),
+    TXT("@", "v=spf1 -all", TTL(3600)),
     TXT("_dmarc", "v=DMARC1; p=reject; adkim=s; aspf=s")
 );
 
