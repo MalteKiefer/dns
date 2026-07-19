@@ -1,8 +1,21 @@
 # Personal DNS zones
 
-DNS records for `kiefer-networks.de`, managed as code with
+DNS records for several personal domains, managed as code with
 [DNSControl](https://docs.dnscontrol.org/) and deployed to
 [deSEC](https://desec.io/) through GitHub Actions.
+
+## Managed zones
+
+| Zone | Purpose |
+| --- | --- |
+| `kiefer-networks.de` | Web and self-hosted mail (SPF/DKIM/DMARC, MTA-STS, DANE, SRV) |
+| `lighthouse-bayreuth.de` | Web and Microsoft 365 mail |
+| `lighthouse-franken.de` | Web only |
+| `lighthouse-kirche.de` | Web and Microsoft 365 mail |
+| `lighthouse-kirchen.de` | Web and Microsoft 365 mail |
+| `lighthouse-kronach.de` | Web and Microsoft 365 mail |
+| `mailgermania.de` | SimpleLogin mail |
+| `p37.nexus` | Internal zone, mail relayed through `kiefer-networks.de` |
 
 ## How it works
 

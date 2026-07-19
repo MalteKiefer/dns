@@ -204,10 +204,7 @@ D("mailgermania.de", REG_INWX, DnsProvider(DSP_DESEC),
     CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
 
     // SPF / DMARC
-    // NOTE: the trailing "!" in the SPF record below is a typo carried over
-    // from the live zone and makes the record invalid. Fix it in a separate,
-    // reviewed change (should read "... ~all").
-    TXT("@", "v=spf1 include:simplelogin.co ~all!"),
+    TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s")
 );
 
