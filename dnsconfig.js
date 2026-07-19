@@ -75,12 +75,15 @@ D("lighthouse-bayreuth.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS,
 
     // Web
-    A("@", "1.1.1.1"),
-    A("www", "1.1.1.1"),
+    A("@", "84.200.227.133"),
+    AAAA("@", "2001:1608:23:8:0:1:0:1"),
+    A("www", "84.200.227.133"),
+    AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
     // Mail (Exchange Online)
-    MX("@", 10, "lighthousebayreuth-de02e.mail.protection.outlook.com."),
+    MX("@", 0, "lighthousebayreuth-de02e.mail.protection.outlook.com."),
     TXT("@", "v=spf1 include:spf.protection.outlook.com -all"),
+    TXT("_dmarc", "v=DMARC1; p=none; rua=mailto:dmarc@lighthouse-bayreuth.de; adkim=s; aspf=s"),
     CNAME("autodiscover", "autodiscover.outlook.com."),
     CNAME("selector1._domainkey", "selector1-lighthousebayreuth-de02e._domainkey.fcgbayreuth.onmicrosoft.com."),
     CNAME("selector2._domainkey", "selector2-lighthousebayreuth-de02e._domainkey.fcgbayreuth.onmicrosoft.com."),
@@ -99,8 +102,15 @@ D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS,
 
     // Web
-    A("@", "1.1.1.1"),
-    A("www", "1.1.1.1")
+    A("@", "84.200.227.133"),
+    AAAA("@", "2001:1608:23:8:0:1:0:1"),
+    A("www", "84.200.227.133"),
+    AAAA("www", "2001:1608:23:8:0:1:0:1"),
+
+    // No mail: reject and block spoofing of this non-sending domain.
+    MX("@", 0, "."),
+    TXT("@", "v=spf1 -all"),
+    TXT("_dmarc", "v=DMARC1; p=reject; adkim=s; aspf=s")
 );
 
 // ---------------------------------------------------------------------------
@@ -115,11 +125,13 @@ D("lighthouse-kirche.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("@", "84.200.227.133"),
     AAAA("@", "2001:1608:23:8:0:1:0:1"),
     A("www", "84.200.227.133"),
+    AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
     // Mail (Exchange Online)
-    MX("@", 10, "lighthousekirche-de02e.mail.protection.outlook.com."),
+    MX("@", 0, "lighthousekirche-de02e.mail.protection.outlook.com."),
     TXT("@", "v=spf1 include:spf.protection.outlook.com -all"),
     TXT("@", "MS=ms75357718"),
+    TXT("_dmarc", "v=DMARC1; p=none; rua=mailto:dmarc@lighthouse-kirche.de; adkim=s; aspf=s"),
     CNAME("autodiscover", "autodiscover.outlook.com."),
     CNAME("selector1._domainkey", "selector1-lighthousekirche-de02e._domainkey.fcgbayreuth.y-v1.dkim.mail.microsoft."),
     CNAME("selector2._domainkey", "selector2-lighthousekirche-de02e._domainkey.fcgbayreuth.y-v1.dkim.mail.microsoft."),
@@ -138,16 +150,16 @@ D("lighthouse-kirchen.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS,
 
     // Web
-    A("@", "1.1.1.1"),
     A("@", "84.200.227.133"),
     AAAA("@", "2001:1608:23:8:0:1:0:1"),
-    A("www", "1.1.1.1"),
     A("www", "84.200.227.133"),
+    AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
     // Mail (Exchange Online)
-    MX("@", 10, "lighthousekirchen-de02e.mail.protection.outlook.com."),
+    MX("@", 0, "lighthousekirchen-de02e.mail.protection.outlook.com."),
     TXT("@", "v=spf1 include:spf.protection.outlook.com -all"),
     TXT("@", "MS=ms93567930"),
+    TXT("_dmarc", "v=DMARC1; p=none; rua=mailto:dmarc@lighthouse-kirchen.de; adkim=s; aspf=s"),
     CNAME("autodiscover", "autodiscover.outlook.com."),
     CNAME("selector1._domainkey", "selector1-lighthousekirchen-de02e._domainkey.fcgbayreuth.y-v1.dkim.mail.microsoft."),
     CNAME("selector2._domainkey", "selector2-lighthousekirchen-de02e._domainkey.fcgbayreuth.y-v1.dkim.mail.microsoft."),
@@ -166,13 +178,16 @@ D("lighthouse-kronach.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS,
 
     // Web
-    A("@", "9.9.9.9"),
-    A("www", "1.1.1.1"),
+    A("@", "84.200.227.133"),
+    AAAA("@", "2001:1608:23:8:0:1:0:1"),
+    A("www", "84.200.227.133"),
+    AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
     // Mail (Exchange Online)
-    MX("@", 10, "lighthousekronach-de02e.mail.protection.outlook.com."),
+    MX("@", 0, "lighthousekronach-de02e.mail.protection.outlook.com."),
     TXT("@", "v=spf1 include:spf.protection.outlook.com -all"),
     TXT("@", "MS=ms24832700"),
+    TXT("_dmarc", "v=DMARC1; p=none; rua=mailto:dmarc@lighthouse-kronach.de; adkim=s; aspf=s"),
     CNAME("autodiscover", "autodiscover.outlook.com."),
     CNAME("selector1._domainkey", "selector1-lighthousekronach-de02e._domainkey.fcgbayreuth.p-v1.dkim.mail.microsoft."),
     CNAME("selector2._domainkey", "selector2-lighthousekronach-de02e._domainkey.fcgbayreuth.p-v1.dkim.mail.microsoft."),
