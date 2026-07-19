@@ -39,7 +39,7 @@ jobs:
 
       - name: Install dnscontrol
         run: |
-          go install github.com/StackExchange/dnscontrol/v4@latest
+          go install github.com/DNSControl/dnscontrol/v4@latest
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
 
       - name: Check syntax
@@ -65,7 +65,7 @@ jobs:
 
       - name: Install dnscontrol
         run: |
-          go install github.com/StackExchange/dnscontrol/v4@latest
+          go install github.com/DNSControl/dnscontrol/v4@latest
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
 
       - name: Push changes
