@@ -31,9 +31,9 @@ jobs:
     env:
       DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@main
 
-      - uses: actions/setup-go@v7
+      - uses: actions/setup-go@main
         with:
           go-version: stable
 
@@ -57,9 +57,9 @@ jobs:
     env:
       DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@main
 
-      - uses: actions/setup-go@v7
+      - uses: actions/setup-go@main
         with:
           go-version: stable
 
