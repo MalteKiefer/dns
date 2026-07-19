@@ -1,0 +1,53 @@
+name: DNS Deploy
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'dnsconfig.js'
+      - 'creds.json'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'dnsconfig.js'
+      - 'creds.json'
+  workflow_dispatch:
+
+concurrency:
+  group: dns-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    container:
+      image: stackexchange/dnscontrol:latest
+    env:
+      DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check syntax
+        run: dnscontrol check
+
+      - name: Preview
+        run: dnscontrol preview
+
+  push:
+    needs: preview
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: production
+    container:
+      image: stackexchange/dnscontrol:latest
+    env:
+      DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push
+        run: dnscontrol push
