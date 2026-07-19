@@ -1,6 +1,6 @@
 name: DNS Deploy
 
-# Preview on every change, push to deSEC only after a merge to main.
+# Preview on pull requests, push to deSEC on merge to main.
 on:
   push:
     branches: [main]
@@ -25,9 +25,10 @@ permissions:
   contents: read
 
 jobs:
-  # Validate the config and show the diff without touching the live zone.
-  preview:
+  deploy:
     runs-on: ubuntu-latest
+    # Only the live push needs the protected environment.
+    environment: ${{ github.event_name == 'pull_request' && '' || 'production' }}
     env:
       DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
     steps:
@@ -45,28 +46,13 @@ jobs:
       - name: Check syntax
         run: dnscontrol check
 
+      # Pull requests only show the diff; they never touch the live zone.
       - name: Preview changes
+        if: github.event_name == 'pull_request'
         run: dnscontrol preview
 
-  # Apply the changes to the live zone. Runs only after a push to main.
-  push:
-    needs: preview
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    environment: production
-    env:
-      DESEC_TOKEN: ${{ secrets.DESEC_TOKEN }}
-    steps:
-      - uses: actions/checkout@main
-
-      - uses: actions/setup-go@main
-        with:
-          go-version: stable
-
-      - name: Install dnscontrol
-        run: |
-          go install github.com/DNSControl/dnscontrol/v4@latest
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-
+      # Pushes to main and manual runs apply the changes.
+      # dnscontrol push validates and prints the diff before applying.
       - name: Push changes
+        if: github.event_name != 'pull_request'
         run: dnscontrol push
