@@ -10,7 +10,7 @@ DNS records for several personal domains, managed as code with
 | --- | --- |
 | `kiefer-networks.de` | Web and self-hosted mail (SPF/DKIM/DMARC, MTA-STS, DANE, SRV) |
 | `lighthouse-bayreuth.de` | Web and Microsoft 365 mail |
-| `lighthouse-franken.de` | Web only |
+| `lighthouse-franken.de` | Web and Microsoft 365 mail |
 | `lighthouse-kirche.de` | Web and Microsoft 365 mail |
 | `lighthouse-kirchen.de` | Web and Microsoft 365 mail |
 | `lighthouse-kronach.de` | Web and Microsoft 365 mail |

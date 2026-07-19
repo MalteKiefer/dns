@@ -107,14 +107,19 @@ D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("www", "84.200.227.133"),
     AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
-    // Microsoft 365 domain verification.
-    // The @ TXT RRset shares one TTL, so keep the SPF record at 3600 too.
+    // Mail (Exchange Online)
+    MX("@", 0, "lighthousefranken-de02e.mail.protection.outlook.com."),
+    // The @ TXT RRset shares one TTL, so keep both records at 3600.
+    TXT("@", "v=spf1 include:spf.protection.outlook.com -all", TTL(3600)),
     TXT("@", "MS=ms27590614", TTL(3600)),
+    TXT("_dmarc", "v=DMARC1; p=none; rua=mailto:dmarc@lighthouse-franken.de; adkim=s; aspf=s"),
+    CNAME("autodiscover", "autodiscover.outlook.com."),
+    CNAME("selector1._domainkey", "selector1-lighthousefranken-de02e._domainkey.fcgbayreuth.q-v1.dkim.mail.microsoft."),
+    CNAME("selector2._domainkey", "selector2-lighthousefranken-de02e._domainkey.fcgbayreuth.q-v1.dkim.mail.microsoft."),
 
-    // No mail: reject and block spoofing of this non-sending domain.
-    MX("@", 0, "."),
-    TXT("@", "v=spf1 -all", TTL(3600)),
-    TXT("_dmarc", "v=DMARC1; p=reject; adkim=s; aspf=s")
+    // Microsoft device management / enrollment
+    CNAME("enterpriseenrollment", "enterpriseenrollment-s.manage.microsoft.com."),
+    CNAME("enterpriseregistration", "enterpriseregistration.windows.net.")
 );
 
 // ---------------------------------------------------------------------------
