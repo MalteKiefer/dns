@@ -107,6 +107,9 @@ D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("www", "84.200.227.133"),
     AAAA("www", "2001:1608:23:8:0:1:0:1"),
 
+    // Microsoft 365 domain verification
+    TXT("@", "MS=ms27590614", TTL(3600)),
+
     // No mail: reject and block spoofing of this non-sending domain.
     MX("@", 0, "."),
     TXT("@", "v=spf1 -all"),
