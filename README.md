@@ -16,6 +16,7 @@ DNS records for several personal domains, managed as code with
 | `lighthouse-kronach.de` | Web and Microsoft 365 mail |
 | `mailgermania.de` | SimpleLogin mail |
 | `p37.nexus` | Internal zone, mail relayed through `kiefer-networks.de` |
+| `in.box` | Personal zone, mail relayed through `kiefer-networks.de` |
 
 ## How it works
 

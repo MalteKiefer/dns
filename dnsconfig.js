@@ -268,3 +268,41 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
     SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
 );
+
+// ---------------------------------------------------------------------------
+// in.box (personal zone, mail relayed through kiefer-networks.de)
+// ---------------------------------------------------------------------------
+
+D("in.box", REG_INWX, DnsProvider(DSP_DESEC),
+    DefaultTTL(3600),
+    DESEC_NS,
+
+    // Web
+    A("@", IP4_WEB),
+    AAAA("@", IP6_WEB),
+    A("*", IP4_WEB, TTL(10800)),
+
+    // Mail (relayed through kiefer-networks.de)
+    MX("@", 10, "mail.kiefer-networks.de."),
+    CNAME("autoconfig", "mail.kiefer-networks.de."),
+    CNAME("autodiscover", "mail.kiefer-networks.de."),
+
+    // MTA-STS policy host
+    A("mta-sts", IP4_MAIL),
+    AAAA("mta-sts", IP6_MAIL),
+
+    // SPF / DKIM / DMARC
+    TXT("@", "v=spf1 mx -all"),
+    // DKIM — add the mail2026 public key here once mailadmin generates it for in.box:
+    //   TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=..."),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@in.box; ruf=mailto:dmarc@in.box; fo=1; adkim=s; aspf=s; pct=100"),
+
+    // MTA-STS / TLS-RPT
+    TXT("_mta-sts", "v=STSv1; id=20260723000000"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@in.box"),
+
+    // SRV
+    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
+    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
+    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
+);
