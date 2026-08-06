@@ -280,7 +280,7 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     // Web
     A("@", IP4_WEB),
     AAAA("@", IP6_WEB),
-    A("*", IP4_WEB, TTL(10800)),
+    CNAME("*", "eu1.netbird.services."),
 
     // Mail (relayed through kiefer-networks.de)
     MX("@", 10, "mail.kiefer-networks.de."),
