@@ -49,7 +49,6 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     A("mta-sts", IP4_MAIL),
     AAAA("mta-sts", IP6_MAIL),
 
-    TXT("@", "protonmail-verification=7b76c4a3258054e33ff36e3ee2cadff9e0e7e924"),
     TXT("@", "v=spf1 mx -all"),
     TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutMr4fhaKrvoRdnSkQ50wUvakIxhyJEydgP3bXfmuCJ0bcGuHJ3EZQZkDcUV4g2t04rF7x+XdE1cTDAVm7hCH1sTsOxKm9CW039ApesPZNNMVr5kdECfBSFdY/Q264UPForgcGhseB4o7FVv15N2LF01FglRI5JQSvBQ+gQCOYoVOTtfxxE/C5gAu69fycqEyYQsJTx2GOCaa9jIika1DYjr5PHeJn/8UVOuairQCMX2oOkfPGsZQgOzaTv+ep81TFrV0VhphU55CE9taiovu7Gsu1kDQIxHkeiyKVJMBxK+WXywdV7q2qJhVhBOHM9vo/alBsSoIN+5DGg0BY+6lwIDAQAB"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@" + DOMAIN + "; ruf=mailto:dmarc@" + DOMAIN + "; fo=1; adkim=s; aspf=s; pct=100"),
@@ -296,7 +295,6 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("mta-sts", IP6_MAIL),
 
     // TXT
-    TXT("@", "protonmail-verification=6278b436dde1a07b44b531d937e3c954d4063fd3"),
     TXT("@", "v=spf1 mx -all"),
     TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnK4gNz44aLwywE2NsOcXNjkkIcGuLopxp9TzbExqcVGkJj2yK5KDr7CzyW2IejeacYaMaGeyskCtFukxJrJaiyHtk70YliX7fwDNMozFZnVe0mvxeWD1WC3lXX6WvEVsO3Qo/QUagXgFUUfUmUg7lG2K0bRhguyMMv1QYiJlcUt5Fr+xgo7K3suVCQbHdu5iIOoPxCUgmjMANbU87/idHbQ3PrYFuUt6plVthabBevdvBpaWukRZuudEJWZHiV132egCVst9YoCF3c4MVRJ9RcbFsW/dJpUArXfHiM7ph/xPagodieBNvfV64TDmHdrVzBfxDwF0tExefVq+t8b6owIDAQAB"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
