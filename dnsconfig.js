@@ -291,12 +291,12 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     A("mta-sts", IP4_MAIL),
     AAAA("mta-sts", IP6_MAIL),
 
-    // SPF / DKIM / DMARC
+    // TXT
+    TXT("@", "protonmail-verification=6278b436dde1a07b44b531d937e3c954d4063fd3"),
     TXT("@", "v=spf1 mx -all"),
     TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnK4gNz44aLwywE2NsOcXNjkkIcGuLopxp9TzbExqcVGkJj2yK5KDr7CzyW2IejeacYaMaGeyskCtFukxJrJaiyHtk70YliX7fwDNMozFZnVe0mvxeWD1WC3lXX6WvEVsO3Qo/QUagXgFUUfUmUg7lG2K0bRhguyMMv1QYiJlcUt5Fr+xgo7K3suVCQbHdu5iIOoPxCUgmjMANbU87/idHbQ3PrYFuUt6plVthabBevdvBpaWukRZuudEJWZHiV132egCVst9YoCF3c4MVRJ9RcbFsW/dJpUArXfHiM7ph/xPagodieBNvfV64TDmHdrVzBfxDwF0tExefVq+t8b6owIDAQAB"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
 
-    // MTA-STS / TLS-RPT
     TXT("_mta-sts", "v=STSv1; id=20260714200634"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@pinlo.me"),
 
