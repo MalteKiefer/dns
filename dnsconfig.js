@@ -3,11 +3,16 @@ var REG_INWX = NewRegistrar("none");
 // DNS records are hosted at deSEC.
 var DSP_DESEC = NewDnsProvider("desec");
 
-// deSEC nameservers shared by every zone below.
-var DESEC_NS = [
-    NAMESERVER("ns1.desec.io."),
-    NAMESERVER("ns2.desec.org."),
-];
+// deSEC reports its own nameservers (ns1.desec.io / ns2.desec.org), and
+// DnsProvider(DSP_DESEC) without an nsCount already turns them into the apex NS
+// records. Declaring them again with NAMESERVER() would append a second copy:
+// deSEC stores NS as one RRset, so the duplicate targets make it reject the
+// whole bulk request ("Duplicate: records must be semantically unique").
+//
+// So only pin the TTL here. AddNSRecords() defaults to 300 (it ignores
+// DefaultTTL) which deSEC raises to the zone minimum, producing endless NS
+// churn; 3600 matches what deSEC already serves, so the RRset stays untouched.
+var DESEC_NS_TTL = NAMESERVER_TTL("3600");
 
 // ---------------------------------------------------------------------------
 // kiefer-networks.de
@@ -23,7 +28,7 @@ var IP6_MAIL = "2a0a:4cc0:c2:78e1:e8dd:7eff:fe13:2b56";
 
 D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(86400),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", IP4_WEB),
@@ -71,7 +76,7 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
 
 D("lighthouse-bayreuth.de", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(86400),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", "84.200.227.133"),
@@ -98,7 +103,7 @@ D("lighthouse-bayreuth.de", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(86400),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", "84.200.227.133"),
@@ -127,7 +132,7 @@ D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("lighthouse-kirche.de", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(86400),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", "84.200.227.133"),
@@ -155,7 +160,7 @@ D("lighthouse-kirche.de", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("lighthouse-kirchen.de", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(86400),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", "84.200.227.133"),
@@ -183,7 +188,7 @@ D("lighthouse-kirchen.de", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("lighthouse-kronach.de", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(86400),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", "84.200.227.133"),
@@ -214,7 +219,7 @@ D("lighthouse-kronach.de", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("mailgermania.de", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(3600),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("*", "82.211.19.16"),
@@ -237,7 +242,7 @@ D("mailgermania.de", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(3600),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", IP4_WEB),
@@ -274,7 +279,7 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
 
 D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     DefaultTTL(3600),
-    DESEC_NS,
+    DESEC_NS_TTL,
 
     // Web
     A("@", IP4_WEB),
