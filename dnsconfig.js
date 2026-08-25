@@ -44,12 +44,11 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     A("mta-sts", IP4_MAIL),
     AAAA("mta-sts", IP6_MAIL),
 
-    // SPF / DKIM / DMARC
+    TXT("@", "protonmail-verification=7b76c4a3258054e33ff36e3ee2cadff9e0e7e924"),
     TXT("@", "v=spf1 mx -all"),
     TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutMr4fhaKrvoRdnSkQ50wUvakIxhyJEydgP3bXfmuCJ0bcGuHJ3EZQZkDcUV4g2t04rF7x+XdE1cTDAVm7hCH1sTsOxKm9CW039ApesPZNNMVr5kdECfBSFdY/Q264UPForgcGhseB4o7FVv15N2LF01FglRI5JQSvBQ+gQCOYoVOTtfxxE/C5gAu69fycqEyYQsJTx2GOCaa9jIika1DYjr5PHeJn/8UVOuairQCMX2oOkfPGsZQgOzaTv+ep81TFrV0VhphU55CE9taiovu7Gsu1kDQIxHkeiyKVJMBxK+WXywdV7q2qJhVhBOHM9vo/alBsSoIN+5DGg0BY+6lwIDAQAB"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@" + DOMAIN + "; ruf=mailto:dmarc@" + DOMAIN + "; fo=1; adkim=s; aspf=s; pct=100"),
 
-    // MTA-STS / TLS-RPT
     TXT("_mta-sts", "v=STSv1; id=20260714200719"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@" + DOMAIN),
 
