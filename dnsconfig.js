@@ -41,32 +41,17 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     // Mail
     A("mail", IP4_MAIL),
     AAAA("mail", IP6_MAIL),
-    MX("@", 10, "mail." + DOMAIN + "."),
-    CNAME("autoconfig", "mail." + DOMAIN + "."),
-    CNAME("autodiscover", "mail." + DOMAIN + "."),
+    MX("@", 10, "mx1.simplelogin.co."),
+    MX("@", 20, "mx2.simplelogin.co."),
+    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
+    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
+    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
 
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    // TXT
+    TXT("@", "v=spf1 include:simplelogin.co ~all"),
+    TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
 
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutMr4fhaKrvoRdnSkQ50wUvakIxhyJEydgP3bXfmuCJ0bcGuHJ3EZQZkDcUV4g2t04rF7x+XdE1cTDAVm7hCH1sTsOxKm9CW039ApesPZNNMVr5kdECfBSFdY/Q264UPForgcGhseB4o7FVv15N2LF01FglRI5JQSvBQ+gQCOYoVOTtfxxE/C5gAu69fycqEyYQsJTx2GOCaa9jIika1DYjr5PHeJn/8UVOuairQCMX2oOkfPGsZQgOzaTv+ep81TFrV0VhphU55CE9taiovu7Gsu1kDQIxHkeiyKVJMBxK+WXywdV7q2qJhVhBOHM9vo/alBsSoIN+5DGg0BY+6lwIDAQAB"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@" + DOMAIN + "; ruf=mailto:dmarc@" + DOMAIN + "; fo=1; adkim=s; aspf=s; pct=100"),
-
-    TXT("_mta-sts", "v=STSv1; id=20260714200719"),
-    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@" + DOMAIN),
-
-    // DANE
-    TLSA("_25._tcp.mail", 3, 1, 1, "9977fe971e2c6dbdb453439320cc079877eadbf9f0201b9f7ef4aa12ef2e218d", TTL(3600)),
-
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail." + DOMAIN + "."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail." + DOMAIN + "."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail." + DOMAIN + "."),
-
-    // CAA
-    CAA("@", "issue", "letsencrypt.org", CAA_CRITICAL),
-    CAA("*", "issue", "letsencrypt.org", CAA_CRITICAL)
 );
 
 // ---------------------------------------------------------------------------
@@ -248,29 +233,17 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", IP6_WEB),
     A("*", IP4_WEB, TTL(10800)),
 
-    // Mail (relayed through kiefer-networks.de)
-    MX("@", 10, "mail.kiefer-networks.de."),
-    CNAME("autoconfig", "mail.kiefer-networks.de."),
-    CNAME("autodiscover", "mail.kiefer-networks.de."),
+    MX("@", 10, "mx1.simplelogin.co."),
+    MX("@", 20, "mx2.simplelogin.co."),
+    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
+    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
+    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
 
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    // TXT
+    TXT("@", "v=spf1 include:simplelogin.co ~all"),
+    TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
 
-    // SPF / DKIM / DMARC
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkrwqWJMb0pLWYyCRKZJWaEu9QpZ/f9sHioStDdEaiwWNcbZPiceGkKZlrfjuUt8xRZTZD6uT/PW2xZGL8TztaA/iWyJKvHMFtLxPKX+s3ILpNKf+Wj4M3xzm2coDN+dkVRxUF1X8Ci2/Ms+n0E2RE6m0aUnzIj0/pn6eR4Uv6pih2gBdDTr1jrz6rFhf9RgsiS9A3flev3eiQ7S8/GQM7PgN5Nn9ncCe9EjpFXlUCUefwNgYvTNO7x+nrv5KBDuAfV0RxRBnZyZ0qGK5ZJcKn9RHT0Gb4N6qinOMSr63QNGXQCLiI2dMr779cqU85uuYdHmHc0mtGfZg6ZzHAFHfIwIDAQAB"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
-
-    // MTA-STS / TLS-RPT
-    TXT("_mta-sts", "v=STSv1; id=20260714200634"),
-    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@p37.nexus"),
-
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
-);
 
 // ---------------------------------------------------------------------------
 // pinlo.me (internal zone, mail relayed through kiefer-networks.de)
