@@ -51,7 +51,6 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
-
 );
 
 // ---------------------------------------------------------------------------
@@ -244,7 +243,7 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
 
-
+);
 // ---------------------------------------------------------------------------
 // pinlo.me (internal zone, mail relayed through kiefer-networks.de)
 // ---------------------------------------------------------------------------
