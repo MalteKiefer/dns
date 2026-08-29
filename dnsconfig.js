@@ -39,6 +39,7 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("*", IP6_WEB),
 
     // Mail
+    CNAME("*", "eu1.netbird.services."),
     A("mail", IP4_MAIL),
     AAAA("mail", IP6_MAIL),
     MX("@", 10, "mx1.simplelogin.co."),
