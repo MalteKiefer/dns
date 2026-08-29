@@ -50,7 +50,7 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@kiefer-networks.de; ruf=mailto:dmarc@kiefer-networks.de; fo=1; adkim=s; aspf=s; pct=100"),
 );
 
 // ---------------------------------------------------------------------------
@@ -241,7 +241,7 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
 
 );
 // ---------------------------------------------------------------------------
@@ -270,3 +270,38 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
 
 );
+
+// ---------------------------------------------------------------------------
+// debgen.org
+// ---------------------------------------------------------------------------
+
+D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
+    DefaultTTL(3600),
+    DESEC_NS_TTL,
+
+    // Web
+    A("@", "185.199.108.153"),
+    A("@", "185.199.109.153"),
+    A("@", "185.199.110.153"),
+    A("@", "185.199.111.153"),
+    AAAA("@", "2606:50c0:8000::153"),
+    AAAA("@", "2606:50c0:8001::153"),
+    AAAA("@", "2606:50c0:8002::153"),
+    AAAA("@", "2606:50c0:8003::153"),
+
+    CNAME("www", "maltekiefer.github.io"),
+
+    // Mail (relayed through kiefer-networks.de)
+    MX("@", 10, "mx1.simplelogin.co."),
+    MX("@", 20, "mx2.simplelogin.co."),
+    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
+    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
+    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
+
+    // TXT
+    TXT("@", "v=spf1 include:simplelogin.co ~all"),
+    TXT("@", "sl-verification=tchsmbifonjrjrhxlqczefkjcetlpp"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@debgen.org; ruf=mailto:dmarc@debgen.org; fo=1; adkim=s; aspf=s; pct=100"),
+
+);
+
