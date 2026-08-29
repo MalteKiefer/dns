@@ -35,8 +35,6 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", IP6_WEB),
     A("www", IP4_WEB),
     AAAA("www", IP6_WEB),
-    A("*", IP4_WEB),
-    AAAA("*", IP6_WEB),
 
     // Mail
     CNAME("*", "eu1.netbird.services."),
