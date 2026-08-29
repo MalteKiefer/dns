@@ -50,7 +50,7 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@kiefer-networks.de; ruf=mailto:dmarc@kiefer-networks.de; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
 );
 
 // ---------------------------------------------------------------------------
@@ -241,7 +241,7 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
 
 );
 // ---------------------------------------------------------------------------
@@ -267,7 +267,7 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
 
 );
 
@@ -301,7 +301,7 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("@", "sl-verification=tchsmbifonjrjrhxlqczefkjcetlpp"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@debgen.org; ruf=mailto:dmarc@debgen.org; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
 
 );
 
