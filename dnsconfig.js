@@ -289,7 +289,7 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", "2606:50c0:8002::153"),
     AAAA("@", "2606:50c0:8003::153"),
 
-    CNAME("www", "maltekiefer.github.io"),
+    CNAME("www", "maltekiefer.github.io."),
 
     // Mail (relayed through kiefer-networks.de)
     MX("@", 10, "mx1.simplelogin.co."),
