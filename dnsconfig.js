@@ -40,16 +40,24 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     CNAME("*", "eu1.netbird.services."),
     A("mail", IP4_MAIL),
     AAAA("mail", IP6_MAIL),
-    MX("@", 10, "mx1.simplelogin.co."),
-    MX("@", 20, "mx2.simplelogin.co."),
-    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
-    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
-    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
+    MX("@", 10, "mail." + DOMAIN + "."),
+    CNAME("autoconfig", "mail." + DOMAIN + "."),
+    CNAME("autodiscover", "mail." + DOMAIN + "."),
+
+    // MTA-STS policy host
+    A("mta-sts", IP4_MAIL),
+    AAAA("mta-sts", IP6_MAIL),
 
     // TXT
-    TXT("@", "v=spf1 include:simplelogin.co ~all"),
-    TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
+    TXT("@", "v=spf1 mx -all"),
+    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutMr4fhaKrvoRdnSkQ50wUvakIxhyJEydgP3bXfmuCJ0bcGuHJ3EZQZkDcUV4g2t04rF7x+XdE1cTDAVm7hCH1sTsOxKm9CW039ApesPZNNMVr5kdECfBSFdY/Q264UPForgcGhseB4o7FVv15N2LF01FglRI5JQSvBQ+gQCOYoVOTtfxxE/C5gAu69fycqEyYQsJTx2GOCaa9jIika1DYjr5PHeJn/8UVOuairQCMX2oOkfPGsZQgOzaTv+ep81TFrV0VhphU55CE9taiovu7Gsu1kDQIxHkeiyKVJMBxK+WXywdV7q2qJhVhBOHM9vo/alBsSoIN+5DGg0BY+6lwIDAQAB"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@" + DOMAIN + "; ruf=mailto:dmarc@" + DOMAIN + "; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@" + DOMAIN),
+
+    // SRV
+    SRV("_autodiscover._tcp", 0, 1, 443, "mail." + DOMAIN + "."),
+    SRV("_imaps._tcp", 0, 1, 993, "mail." + DOMAIN + "."),
+    SRV("_submissions._tcp", 0, 1, 465, "mail." + DOMAIN + ".")
 );
 
 // ---------------------------------------------------------------------------
@@ -231,17 +239,25 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", IP6_WEB),
     A("*", IP4_WEB, TTL(10800)),
 
-    MX("@", 10, "mx1.simplelogin.co."),
-    MX("@", 20, "mx2.simplelogin.co."),
-    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
-    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
-    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
+    // Mail (relayed through kiefer-networks.de)
+    MX("@", 10, "mail.kiefer-networks.de."),
+    CNAME("autoconfig", "mail.kiefer-networks.de."),
+    CNAME("autodiscover", "mail.kiefer-networks.de."),
+
+    // MTA-STS policy host
+    A("mta-sts", IP4_MAIL),
+    AAAA("mta-sts", IP6_MAIL),
 
     // TXT
-    TXT("@", "v=spf1 include:simplelogin.co ~all"),
-    TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
+    TXT("@", "v=spf1 mx -all"),
+    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkrwqWJMb0pLWYyCRKZJWaEu9QpZ/f9sHioStDdEaiwWNcbZPiceGkKZlrfjuUt8xRZTZD6uT/PW2xZGL8TztaA/iWyJKvHMFtLxPKX+s3ILpNKf+Wj4M3xzm2coDN+dkVRxUF1X8Ci2/Ms+n0E2RE6m0aUnzIj0/pn6eR4Uv6pih2gBdDTr1jrz6rFhf9RgsiS9A3flev3eiQ7S8/GQM7PgN5Nn9ncCe9EjpFXlUCUefwNgYvTNO7x+nrv5KBDuAfV0RxRBnZyZ0qGK5ZJcKn9RHT0Gb4N6qinOMSr63QNGXQCLiI2dMr779cqU85uuYdHmHc0mtGfZg6ZzHAFHfIwIDAQAB"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@p37.nexus"),
 
+    // SRV
+    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
+    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
+    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
 );
 // ---------------------------------------------------------------------------
 // pinlo.me (internal zone, mail relayed through kiefer-networks.de)
@@ -257,17 +273,24 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     CNAME("*", "eu1.netbird.services."),
 
     // Mail (relayed through kiefer-networks.de)
-    MX("@", 10, "mx1.simplelogin.co."),
-    MX("@", 20, "mx2.simplelogin.co."),
-    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
-    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
-    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
+    MX("@", 10, "mail.kiefer-networks.de."),
+    CNAME("autoconfig", "mail.kiefer-networks.de."),
+    CNAME("autodiscover", "mail.kiefer-networks.de."),
+
+    // MTA-STS policy host
+    A("mta-sts", IP4_MAIL),
+    AAAA("mta-sts", IP6_MAIL),
 
     // TXT
-    TXT("@", "v=spf1 include:simplelogin.co ~all"),
-    TXT("@", "sl-verification=ldwtnedgxytujkjvvxhxqwpntwgkzf"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
+    TXT("@", "v=spf1 mx -all"),
+    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnK4gNz44aLwywE2NsOcXNjkkIcGuLopxp9TzbExqcVGkJj2yK5KDr7CzyW2IejeacYaMaGeyskCtFukxJrJaiyHtk70YliX7fwDNMozFZnVe0mvxeWD1WC3lXX6WvEVsO3Qo/QUagXgFUUfUmUg7lG2K0bRhguyMMv1QYiJlcUt5Fr+xgo7K3suVCQbHdu5iIOoPxCUgmjMANbU87/idHbQ3PrYFuUt6plVthabBevdvBpaWukRZuudEJWZHiV132egCVst9YoCF3c4MVRJ9RcbFsW/dJpUArXfHiM7ph/xPagodieBNvfV64TDmHdrVzBfxDwF0tExefVq+t8b6owIDAQAB"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@pinlo.me"),
 
+    // SRV
+    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
+    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
+    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
 );
 
 // ---------------------------------------------------------------------------
@@ -291,16 +314,23 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
     CNAME("www", "maltekiefer.github.io."),
 
     // Mail (relayed through kiefer-networks.de)
-    MX("@", 10, "mx1.simplelogin.co."),
-    MX("@", 20, "mx2.simplelogin.co."),
-    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
-    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
-    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
+    MX("@", 10, "mail.kiefer-networks.de."),
+    CNAME("autoconfig", "mail.kiefer-networks.de."),
+    CNAME("autodiscover", "mail.kiefer-networks.de."),
+
+    // MTA-STS policy host
+    A("mta-sts", IP4_MAIL),
+    AAAA("mta-sts", IP6_MAIL),
 
     // TXT
-    TXT("@", "v=spf1 include:simplelogin.co ~all"),
-    TXT("@", "sl-verification=tchsmbifonjrjrhxlqczefkjcetlpp"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
+    TXT("@", "v=spf1 mx -all"),
+    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8TK70bUnmMGvHbt4JYirGQOSz34If6lThP06DchaaowYM4z6WJH5ivTnrFeL6nrytZCIPHkUSfyoONkjkCAadLNBwyiuIrWgs4EEXw/NyvzNhLvWskv10QMzQ9EsceMemY/5ca79EU43DPBUsjtmFPL5U/cg9jh0h8aYwTqUS+3af+1jDAWaBp1hVPxDyVrGyFfPK9scwG3inbaudLu3c7NTYhOl9XXjkIJtbMVCcF9QiCSuXPINyNflYeC++fR1DtSMkrcGu77894jLF60gJF0/+tc3Rt3YvS4ONIvVApCpq8zDyM3XNm5nBpnVWJsXFZn+Xd9pV2uerAblOmxtZwIDAQAB"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@debgen.org; ruf=mailto:dmarc@debgen.org; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@debgen.org"),
 
+    // SRV
+    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
+    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
+    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
 );
 
