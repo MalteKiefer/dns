@@ -40,24 +40,15 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     CNAME("*", "eu1.netbird.services."),
     A("mail", IP4_MAIL),
     AAAA("mail", IP6_MAIL),
-    MX("@", 10, "mail." + DOMAIN + "."),
-    CNAME("autoconfig", "mail." + DOMAIN + "."),
-    CNAME("autodiscover", "mail." + DOMAIN + "."),
-
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    MX("@", 0, "kiefernetworks-de01e.mail.protection.outlook.com."),
+    CNAME("autodiscover", "autodiscover.outlook.com."),
+    CNAME("enterpriseregistration", "enterpriseregistration.windows.net."),
+    CNAME("enterpriseenrollment", "enterpriseenrollment-s.manage.microsoft.com."),
+    CNAME("selector1._domainkey", "selector1-kiefernetworks-de01e._domainkey.TrinexaConsulting.r-v1.dkim.mail.microsoft."),
+    CNAME("selector2._domainkey", "selector2-kiefernetworks-de01e._domainkey.TrinexaConsulting.r-v1.dkim.mail.microsoft."),
 
     // TXT
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutMr4fhaKrvoRdnSkQ50wUvakIxhyJEydgP3bXfmuCJ0bcGuHJ3EZQZkDcUV4g2t04rF7x+XdE1cTDAVm7hCH1sTsOxKm9CW039ApesPZNNMVr5kdECfBSFdY/Q264UPForgcGhseB4o7FVv15N2LF01FglRI5JQSvBQ+gQCOYoVOTtfxxE/C5gAu69fycqEyYQsJTx2GOCaa9jIika1DYjr5PHeJn/8UVOuairQCMX2oOkfPGsZQgOzaTv+ep81TFrV0VhphU55CE9taiovu7Gsu1kDQIxHkeiyKVJMBxK+WXywdV7q2qJhVhBOHM9vo/alBsSoIN+5DGg0BY+6lwIDAQAB"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@" + DOMAIN + "; ruf=mailto:dmarc@" + DOMAIN + "; fo=1; adkim=s; aspf=s; pct=100"),
-    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@" + DOMAIN),
-
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail." + DOMAIN + "."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail." + DOMAIN + "."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail." + DOMAIN + ".")
+    TXT("@", "v=spf1 include:spf.protection.outlook.com -all"),
 );
 
 // ---------------------------------------------------------------------------
