@@ -15,7 +15,7 @@ var DSP_DESEC = NewDnsProvider("desec");
 var DESEC_NS_TTL = NAMESERVER_TTL("3600");
 
 // ---------------------------------------------------------------------------
-// kiefer-networks.de
+// kiefer-networks.de (mail at mailbox.org)
 // ---------------------------------------------------------------------------
 
 var DOMAIN = "kiefer-networks.de";
@@ -36,28 +36,43 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     A("www", IP4_WEB),
     AAAA("www", IP6_WEB),
 
-    // Mail
+    // NetBird wildcard
     CNAME("*", "eu1.netbird.services."),
+
+    // Mail server host: mail is served by mailbox.org now, the box itself
+    // stays reachable under this name.
     A("mail", IP4_MAIL),
     AAAA("mail", IP6_MAIL),
-    MX("@", 10, "mail." + DOMAIN + "."),
-    CNAME("autoconfig", "mail." + DOMAIN + "."),
-    CNAME("autodiscover", "mail." + DOMAIN + "."),
 
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    // Mail (mailbox.org custom domain)
+    MX("@", 10, "mxext1.mailbox.org."),
+    MX("@", 10, "mxext2.mailbox.org."),
+    MX("@", 10, "mxext3.mailbox.org."),
+    MX("@", 10, "mxext4.mailbox.org."),
+
+    // DKIM: mailbox.org holds the keys, the CNAMEs let them rotate without
+    // a DNS change here. Lowercase on purpose - DNS is case-insensitive and
+    // deSEC normalises anyway, so this avoids diff churn.
+    CNAME("mbo0001._domainkey", "mbo0001._domainkey.mailbox.org."),
+    CNAME("mbo0002._domainkey", "mbo0002._domainkey.mailbox.org."),
+    CNAME("mbo0003._domainkey", "mbo0003._domainkey.mailbox.org."),
+    CNAME("mbo0004._domainkey", "mbo0004._domainkey.mailbox.org."),
 
     // TXT
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAutMr4fhaKrvoRdnSkQ50wUvakIxhyJEydgP3bXfmuCJ0bcGuHJ3EZQZkDcUV4g2t04rF7x+XdE1cTDAVm7hCH1sTsOxKm9CW039ApesPZNNMVr5kdECfBSFdY/Q264UPForgcGhseB4o7FVv15N2LF01FglRI5JQSvBQ+gQCOYoVOTtfxxE/C5gAu69fycqEyYQsJTx2GOCaa9jIika1DYjr5PHeJn/8UVOuairQCMX2oOkfPGsZQgOzaTv+ep81TFrV0VhphU55CE9taiovu7Gsu1kDQIxHkeiyKVJMBxK+WXywdV7q2qJhVhBOHM9vo/alBsSoIN+5DGg0BY+6lwIDAQAB"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@" + DOMAIN + "; ruf=mailto:dmarc@" + DOMAIN + "; fo=1; adkim=s; aspf=s; pct=100"),
-    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@" + DOMAIN),
+    // mailbox.org documents ~all; kept at -all since all outbound goes there.
+    TXT("@", "v=spf1 include:mailbox.org -all"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@kiefer-networks.de; ruf=mailto:dmarc@kiefer-networks.de; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@kiefer-networks.de"),
 
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail." + DOMAIN + "."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail." + DOMAIN + "."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail." + DOMAIN + ".")
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "90bf257050527968655648da70bf454e39539ecd"),
+
+    // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
+    // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
+    // CNAME under this domain would fail TLS validation in the clients.
+    SRV("_autodiscover._tcp", 0, 1, 443, "auto.mailbox.org."),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
 );
 
 // ---------------------------------------------------------------------------
@@ -227,7 +242,7 @@ D("mailgermania.de", REG_INWX, DnsProvider(DSP_DESEC),
 );
 
 // ---------------------------------------------------------------------------
-// p37.nexus (internal zone, mail relayed through kiefer-networks.de)
+// p37.nexus (mail at mailbox.org)
 // ---------------------------------------------------------------------------
 
 D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
@@ -239,28 +254,38 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", IP6_WEB),
     A("*", IP4_WEB, TTL(10800)),
 
-    // Mail (relayed through kiefer-networks.de)
-    MX("@", 10, "mail.kiefer-networks.de."),
-    CNAME("autoconfig", "mail.kiefer-networks.de."),
-    CNAME("autodiscover", "mail.kiefer-networks.de."),
+    // Mail (mailbox.org custom domain)
+    MX("@", 10, "mxext1.mailbox.org."),
+    MX("@", 10, "mxext2.mailbox.org."),
+    MX("@", 10, "mxext3.mailbox.org."),
+    MX("@", 10, "mxext4.mailbox.org."),
 
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    // DKIM: mailbox.org holds the keys, the CNAMEs let them rotate without
+    // a DNS change here. Lowercase on purpose - DNS is case-insensitive and
+    // deSEC normalises anyway, so this avoids diff churn.
+    CNAME("mbo0001._domainkey", "mbo0001._domainkey.mailbox.org."),
+    CNAME("mbo0002._domainkey", "mbo0002._domainkey.mailbox.org."),
+    CNAME("mbo0003._domainkey", "mbo0003._domainkey.mailbox.org."),
+    CNAME("mbo0004._domainkey", "mbo0004._domainkey.mailbox.org."),
 
     // TXT
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkrwqWJMb0pLWYyCRKZJWaEu9QpZ/f9sHioStDdEaiwWNcbZPiceGkKZlrfjuUt8xRZTZD6uT/PW2xZGL8TztaA/iWyJKvHMFtLxPKX+s3ILpNKf+Wj4M3xzm2coDN+dkVRxUF1X8Ci2/Ms+n0E2RE6m0aUnzIj0/pn6eR4Uv6pih2gBdDTr1jrz6rFhf9RgsiS9A3flev3eiQ7S8/GQM7PgN5Nn9ncCe9EjpFXlUCUefwNgYvTNO7x+nrv5KBDuAfV0RxRBnZyZ0qGK5ZJcKn9RHT0Gb4N6qinOMSr63QNGXQCLiI2dMr779cqU85uuYdHmHc0mtGfZg6ZzHAFHfIwIDAQAB"),
+    // mailbox.org documents ~all; kept at -all since all outbound goes there.
+    TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@p37.nexus"),
 
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "59d36b6cbc4ea9e4ea241dba6c4f7cc56e29ff27"),
+
+    // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
+    // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
+    // CNAME under this domain would fail TLS validation in the clients.
+    SRV("_autodiscover._tcp", 0, 1, 443, "auto.mailbox.org."),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
 );
 // ---------------------------------------------------------------------------
-// pinlo.me (internal zone, mail relayed through kiefer-networks.de)
+// pinlo.me (mail at mailbox.org)
 // ---------------------------------------------------------------------------
 
 D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
@@ -272,29 +297,39 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", IP6_WEB),
     CNAME("*", "eu1.netbird.services."),
 
-    // Mail (relayed through kiefer-networks.de)
-    MX("@", 10, "mail.kiefer-networks.de."),
-    CNAME("autoconfig", "mail.kiefer-networks.de."),
-    CNAME("autodiscover", "mail.kiefer-networks.de."),
+    // Mail (mailbox.org custom domain)
+    MX("@", 10, "mxext1.mailbox.org."),
+    MX("@", 10, "mxext2.mailbox.org."),
+    MX("@", 10, "mxext3.mailbox.org."),
+    MX("@", 10, "mxext4.mailbox.org."),
 
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    // DKIM: mailbox.org holds the keys, the CNAMEs let them rotate without
+    // a DNS change here. Lowercase on purpose - DNS is case-insensitive and
+    // deSEC normalises anyway, so this avoids diff churn.
+    CNAME("mbo0001._domainkey", "mbo0001._domainkey.mailbox.org."),
+    CNAME("mbo0002._domainkey", "mbo0002._domainkey.mailbox.org."),
+    CNAME("mbo0003._domainkey", "mbo0003._domainkey.mailbox.org."),
+    CNAME("mbo0004._domainkey", "mbo0004._domainkey.mailbox.org."),
 
     // TXT
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnK4gNz44aLwywE2NsOcXNjkkIcGuLopxp9TzbExqcVGkJj2yK5KDr7CzyW2IejeacYaMaGeyskCtFukxJrJaiyHtk70YliX7fwDNMozFZnVe0mvxeWD1WC3lXX6WvEVsO3Qo/QUagXgFUUfUmUg7lG2K0bRhguyMMv1QYiJlcUt5Fr+xgo7K3suVCQbHdu5iIOoPxCUgmjMANbU87/idHbQ3PrYFuUt6plVthabBevdvBpaWukRZuudEJWZHiV132egCVst9YoCF3c4MVRJ9RcbFsW/dJpUArXfHiM7ph/xPagodieBNvfV64TDmHdrVzBfxDwF0tExefVq+t8b6owIDAQAB"),
+    // mailbox.org documents ~all; kept at -all since all outbound goes there.
+    TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@pinlo.me"),
 
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "8be14aa421b4e92fcc2a4e352c30ea970d7f9bc9"),
+
+    // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
+    // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
+    // CNAME under this domain would fail TLS validation in the clients.
+    SRV("_autodiscover._tcp", 0, 1, 443, "auto.mailbox.org."),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
 );
 
 // ---------------------------------------------------------------------------
-// debgen.org
+// debgen.org (mail at mailbox.org)
 // ---------------------------------------------------------------------------
 
 D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
@@ -313,24 +348,34 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
 
     CNAME("www", "maltekiefer.github.io."),
 
-    // Mail (relayed through kiefer-networks.de)
-    MX("@", 10, "mail.kiefer-networks.de."),
-    CNAME("autoconfig", "mail.kiefer-networks.de."),
-    CNAME("autodiscover", "mail.kiefer-networks.de."),
+    // Mail (mailbox.org custom domain)
+    MX("@", 10, "mxext1.mailbox.org."),
+    MX("@", 10, "mxext2.mailbox.org."),
+    MX("@", 10, "mxext3.mailbox.org."),
+    MX("@", 10, "mxext4.mailbox.org."),
 
-    // MTA-STS policy host
-    A("mta-sts", IP4_MAIL),
-    AAAA("mta-sts", IP6_MAIL),
+    // DKIM: mailbox.org holds the keys, the CNAMEs let them rotate without
+    // a DNS change here. Lowercase on purpose - DNS is case-insensitive and
+    // deSEC normalises anyway, so this avoids diff churn.
+    CNAME("mbo0001._domainkey", "mbo0001._domainkey.mailbox.org."),
+    CNAME("mbo0002._domainkey", "mbo0002._domainkey.mailbox.org."),
+    CNAME("mbo0003._domainkey", "mbo0003._domainkey.mailbox.org."),
+    CNAME("mbo0004._domainkey", "mbo0004._domainkey.mailbox.org."),
 
     // TXT
-    TXT("@", "v=spf1 mx -all"),
-    TXT("mail2026._domainkey", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8TK70bUnmMGvHbt4JYirGQOSz34If6lThP06DchaaowYM4z6WJH5ivTnrFeL6nrytZCIPHkUSfyoONkjkCAadLNBwyiuIrWgs4EEXw/NyvzNhLvWskv10QMzQ9EsceMemY/5ca79EU43DPBUsjtmFPL5U/cg9jh0h8aYwTqUS+3af+1jDAWaBp1hVPxDyVrGyFfPK9scwG3inbaudLu3c7NTYhOl9XXjkIJtbMVCcF9QiCSuXPINyNflYeC++fR1DtSMkrcGu77894jLF60gJF0/+tc3Rt3YvS4ONIvVApCpq8zDyM3XNm5nBpnVWJsXFZn+Xd9pV2uerAblOmxtZwIDAQAB"),
+    // mailbox.org documents ~all; kept at -all since all outbound goes there.
+    TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@debgen.org; ruf=mailto:dmarc@debgen.org; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@debgen.org"),
 
-    // SRV
-    SRV("_autodiscover._tcp", 0, 1, 443, "mail.kiefer-networks.de."),
-    SRV("_imaps._tcp", 0, 1, 993, "mail.kiefer-networks.de."),
-    SRV("_submissions._tcp", 0, 1, 465, "mail.kiefer-networks.de.")
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "9a52cfec4528232e2b2eb16b7aecb8d8dd664687"),
+
+    // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
+    // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
+    // CNAME under this domain would fail TLS validation in the clients.
+    SRV("_autodiscover._tcp", 0, 1, 443, "auto.mailbox.org."),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
 );
 
