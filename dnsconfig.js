@@ -38,6 +38,10 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
 
     // NetBird wildcard
     CNAME("*", "eu1.netbird.services."),
+	
+    // AUTH
+    A("auth", IP4_WEB),
+    AAAA("auth", IP6_WEB),
 
     // Mail server host: mail is served by mailbox.org now, the box itself
     // stays reachable under this name.
