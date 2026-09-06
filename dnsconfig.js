@@ -50,6 +50,8 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("mon", IP6_WEB),
 	A("docs", IP4_WEB),
     AAAA("docs", IP6_WEB),
+	A("photos", IP4_WEB),
+    AAAA("photos", IP6_WEB),
 
     // Mail server host: mail is served by mailbox.org now, the box itself
     // stays reachable under this name.
