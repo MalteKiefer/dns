@@ -42,8 +42,8 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     // Sites
     A("auth", IP4_WEB),
     AAAA("auth", IP6_WEB),
-    A("search", IP4_WEB),
-    AAAA("search", IP6_WEB),
+	A("notify", IP4_WEB),
+    AAAA("notify", IP6_WEB),
     A("time", IP4_WEB),
     AAAA("time", IP6_WEB),
     A("mon", IP4_WEB),
@@ -56,8 +56,6 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("stats", IP6_WEB),
 	A("sync", IP4_WEB),
     AAAA("sync", IP6_WEB),
-	A("notify", IP4_WEB),
-    AAAA("notify", IP6_WEB),
 
     // Mail server host: mail is served by mailbox.org now, the box itself
     // stays reachable under this name.
