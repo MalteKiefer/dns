@@ -35,35 +35,10 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", IP6_WEB),
     A("www", IP4_WEB),
     AAAA("www", IP6_WEB),
-
-    // NetBird wildcard
-    CNAME("*", "eu1.netbird.services."),
 	
     // Sites
-    A("auth", IP4_WEB),
-    AAAA("auth", IP6_WEB),
-	A("notify", IP4_WEB),
-    AAAA("notify", IP6_WEB),
-    A("time", IP4_WEB),
-    AAAA("time", IP6_WEB),
-    A("mon", IP4_WEB),
-    AAAA("mon", IP6_WEB),
-	A("docs", IP4_WEB),
-    AAAA("docs", IP6_WEB),
-	A("photos", IP4_WEB),
-    AAAA("photos", IP6_WEB),
-	A("stats", IP4_WEB),
-    AAAA("stats", IP6_WEB),
-	A("sync", IP4_WEB),
-    AAAA("sync", IP6_WEB),
-	A("pm", IP4_WEB),
-    AAAA("pm", IP6_WEB),
-	A("erp", IP4_WEB),
-    AAAA("erp", IP6_WEB),
-	A("dash", IP4_WEB),
-    AAAA("dash", IP6_WEB),
-	A("status", IP4_WEB),
-    AAAA("status", IP6_WEB),
+    A("*", IP4_WEB),
+    AAAA("*", IP6_WEB),
 
     // Mail server host: mail is served by mailbox.org now, the box itself
     // stays reachable under this name.
