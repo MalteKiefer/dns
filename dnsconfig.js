@@ -53,7 +53,7 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     // SPF / DMARC
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
-    TXT("@", "sl-verification=becpqbvnuosaskmrdegmtmopwsbios")
+    TXT("@", "sl-verification=becpqbvnuosaskmrdegmtmopwsbios"),
 
     TXT("_github-pages-challenge-kiefer-networks", "67d73ff266432fb032ca026238885f")
 );
