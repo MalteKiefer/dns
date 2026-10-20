@@ -256,34 +256,15 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     A("*", IP4_WEB, TTL(10800)),
 
     // Mail (mailbox.org custom domain)
-    MX("@", 10, "mxext1.mailbox.org."),
-    MX("@", 10, "mxext2.mailbox.org."),
-    MX("@", 10, "mxext3.mailbox.org."),
-    MX("@", 10, "mxext4.mailbox.org."),
+    MX("@", 10, "mx1.simplelogin.co."),
+    MX("@", 20, "mx2.simplelogin.co."),
+    CNAME("dkim._domainkey", "dkim._domainkey.simplelogin.co."),
+    CNAME("dkim02._domainkey", "dkim02._domainkey.simplelogin.co."),
+    CNAME("dkim03._domainkey", "dkim03._domainkey.simplelogin.co."),
 
-    // DKIM: mailbox.org holds the keys, the CNAMEs let them rotate without
-    // a DNS change here. Lowercase on purpose - DNS is case-insensitive and
-    // deSEC normalises anyway, so this avoids diff churn.
-    CNAME("mbo0001._domainkey", "mbo0001._domainkey.mailbox.org."),
-    CNAME("mbo0002._domainkey", "mbo0002._domainkey.mailbox.org."),
-    CNAME("mbo0003._domainkey", "mbo0003._domainkey.mailbox.org."),
-    CNAME("mbo0004._domainkey", "mbo0004._domainkey.mailbox.org."),
-
-    // TXT
-    // mailbox.org documents ~all; kept at -all since all outbound goes there.
-    TXT("@", "v=spf1 include:mailbox.org -all"),
-    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
-    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@p37.nexus"),
-
-    // mailbox.org domain verification
-    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "59d36b6cbc4ea9e4ea241dba6c4f7cc56e29ff27"),
-
-    // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
-    // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
-    // CNAME under this domain would fail TLS validation in the clients.
-    SRV("_autodiscover._tcp", 0, 1, 443, "auto.mailbox.org."),
-    SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
-    SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
+    // SPF / DMARC
+    TXT("@", "v=spf1 include:simplelogin.co ~all"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s")
 );
 // ---------------------------------------------------------------------------
 // pinlo.me (mail at mailbox.org)
