@@ -31,14 +31,17 @@ D(DOMAIN, REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS_TTL,
 
     // Web
-    A("@", IP4_WEB),
-    AAAA("@", IP6_WEB),
-    A("www", IP4_WEB),
-    AAAA("www", IP6_WEB),
-	
-    // Sites
-    A("*", IP4_WEB),
-    AAAA("*", IP6_WEB),
+    A("@", "185.199.108.153"),
+    A("@", "185.199.109.153"),
+    A("@", "185.199.110.153"),
+    A("@", "185.199.111.153"),
+
+    AAAA("@", "2606:50c0:8000::153"),
+    AAAA("@", "2606:50c0:8001::153"),
+    AAAA("@", "2606:50c0:8002::153"),
+    AAAA("@", "2606:50c0:8003::153"),
+
+    CNAME("www", "kiefer-networks.github.io."),
 
     // Mail (mailbox.org custom domain)
     MX("@", 10, "mx1.simplelogin.co."),
