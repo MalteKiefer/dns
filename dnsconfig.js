@@ -53,6 +53,7 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@kiefer-networks.de; ruf=mailto:dmarc@kiefer-networks.de; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@kiefer-networks.de"),
+    TXT("@", "sl-verification=eeciiumimgnrvyxcvpxittzjzuocge"),
     TXT("_github-pages-challenge-kiefer-networks", "67d73ff266432fb032ca026238885f"),
 
     // mailbox.org domain verification
@@ -256,6 +257,7 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@p37.nexus; ruf=mailto:dmarc@p37.nexus; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@p37.nexus"),
+    TXT("@", "sl-verification=lmkisojozujtptobfophemeyrincms"),
 
     // mailbox.org domain verification
     TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "59d36b6cbc4ea9e4ea241dba6c4f7cc56e29ff27"),
@@ -296,6 +298,7 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@pinlo.me; ruf=mailto:dmarc@pinlo.me; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@pinlo.me"),
+    TXT("@", "sl-verification=ucmanmycxksxyjtnceeadtzbpytrac"),
 
     // mailbox.org domain verification
     TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "8be14aa421b4e92fcc2a4e352c30ea970d7f9bc9"),
@@ -347,6 +350,7 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("@", "v=spf1 include:mailbox.org -all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@debgen.org; ruf=mailto:dmarc@debgen.org; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@debgen.org"),
+    TXT("@", "sl-verification=itiigdlxhrxgubdzoeqcebebarxmnl"),
 
     // mailbox.org domain verification
     TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "9a52cfec4528232e2b2eb16b7aecb8d8dd664687"),
