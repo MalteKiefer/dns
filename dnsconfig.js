@@ -35,9 +35,9 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
 
     CNAME("www", "kiefer-networks.github.io."),
 
-    // MDM
-    A("mdm", "2.29.138.139"),
-    AAAA("mdm", "2a01:4f9:c015:e215::1"),
+    // Patch
+    A("patch", "2.29.138.139"),
+    AAAA("patch", "2a01:4f9:c015:e215::1"),
 
     // Apple domain verification
     TXT("@", "apple-domain-verification=PLwAiO310kQfChn8"),
