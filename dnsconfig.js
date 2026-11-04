@@ -34,6 +34,11 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     AAAA("@", "2606:50c0:8003::153"),
 
     CNAME("www", "kiefer-networks.github.io."),
+
+    // MDM
+    A("mdm", "2.29.138.139"),
+    AAAA("mdm", "2a01:4f9:c015:e215::1"),
+
     // Mail (SimpleLogin)
     MX("@", 10, "mx1.simplelogin.co."),
     MX("@", 20, "mx2.simplelogin.co."),
