@@ -39,6 +39,9 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("mdm", "2.29.138.139"),
     AAAA("mdm", "2a01:4f9:c015:e215::1"),
 
+    // Apple domain verification
+    TXT("@", "apple-domain-verification=PLwAiO310kQfChn8"),
+
     // Mail (SimpleLogin)
     MX("@", 10, "mx1.simplelogin.co."),
     MX("@", 20, "mx2.simplelogin.co."),
