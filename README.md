@@ -8,16 +8,16 @@ DNS records for several personal domains, managed as code with
 
 | Zone | Purpose |
 | --- | --- |
-| `kiefer-networks.de` | Web (GitHub Pages) and mail via SimpleLogin |
-| `debgen.org` | Web (GitHub Pages) and mail via SimpleLogin |
+| `kiefer-networks.de` | Web (GitHub Pages) and mail at mailbox.org |
+| `debgen.org` | Web (GitHub Pages) and mail at mailbox.org |
 | `lighthouse-bayreuth.de` | Web and Microsoft 365 mail |
 | `lighthouse-franken.de` | Web and Microsoft 365 mail |
 | `lighthouse-kirche.de` | Web and Microsoft 365 mail |
 | `lighthouse-kirchen.de` | Web and Microsoft 365 mail |
 | `lighthouse-kronach.de` | Web and Microsoft 365 mail |
 | `mailgermania.de` | SimpleLogin mail |
-| `p37.nexus` | Mail via SimpleLogin |
-| `pinlo.me` | Mail via SimpleLogin, wildcard to NetBird |
+| `p37.nexus` | Mail at mailbox.org |
+| `pinlo.me` | Mail at mailbox.org, wildcard to NetBird |
 
 ## How it works
 
