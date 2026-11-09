@@ -47,6 +47,14 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("mail", "65.21.106.107"),
     AAAA("mail", "2a01:4f9:c01d:22fd::1"),
 
+    // Client autoconfig, autodiscover and MTA-STS policy host
+    A("autoconfig", "65.21.106.107"),
+    AAAA("autoconfig", "2a01:4f9:c01d:22fd::1"),
+    A("autodiscover", "65.21.106.107"),
+    AAAA("autodiscover", "2a01:4f9:c01d:22fd::1"),
+    A("mta-sts", "65.21.106.107"),
+    AAAA("mta-sts", "2a01:4f9:c01d:22fd::1"),
+
     // Apple domain verification
     TXT("@", "apple-domain-verification=PLwAiO310kQfChn8"),
 
