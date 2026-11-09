@@ -43,6 +43,10 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("auth", "2.29.138.139"),
     AAAA("auth", "2a01:4f9:c015:e215::1"),
 
+    // Mail host
+    A("mail", "65.21.106.107"),
+    AAAA("mail", "2a01:4f9:c01d:22fd::1"),
+
     // Apple domain verification
     TXT("@", "apple-domain-verification=PLwAiO310kQfChn8"),
 
