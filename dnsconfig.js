@@ -35,29 +35,25 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
 
     CNAME("www", "kiefer-networks.github.io."),
 
-    // Patch
-    A("patch", "2.29.138.139"),
-    AAAA("patch", "2a01:4f9:c015:e215::1"),
-
     // Auth
     A("auth", "2.29.138.139"),
     AAAA("auth", "2a01:4f9:c015:e215::1"),
 
     // Mail host
-    A("mail", "65.21.106.107"),
-    AAAA("mail", "2a01:4f9:c01d:22fd::1"),
+    A("mail", "2.29.138.139"),
+    AAAA("mail", "2a01:4f9:c015:e215::1"),
 
     // Client autoconfig, autodiscover and MTA-STS policy host
-    A("autoconfig", "65.21.106.107"),
-    AAAA("autoconfig", "2a01:4f9:c01d:22fd::1"),
-    A("autodiscover", "65.21.106.107"),
-    AAAA("autodiscover", "2a01:4f9:c01d:22fd::1"),
-    A("mta-sts", "65.21.106.107"),
-    AAAA("mta-sts", "2a01:4f9:c01d:22fd::1"),
+    A("autoconfig", "2.29.138.139"),
+    AAAA("autoconfig", "2a01:4f9:c015:e215::1"),
+    A("autodiscover", "2.29.138.139"),
+    AAAA("autodiscover", "2a01:4f9:c015:e215::1"),
+    A("mta-sts", "2.29.138.139"),
+    AAAA("mta-sts", "2a01:4f9:c015:e215::1"),
 
     // Webmail
-    A("webmail", "65.21.106.107"),
-    AAAA("webmail", "2a01:4f9:c01d:22fd::1"),
+    A("webmail", "2.29.138.139"),
+    AAAA("webmail", "2a01:4f9:c015:e215::1"),
 
     // Apple domain verification
     TXT("@", "apple-domain-verification=PLwAiO310kQfChn8"),
