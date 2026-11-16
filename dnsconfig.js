@@ -60,7 +60,7 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
-    TXT("@", "sl-verification=eeciiumimgnrvyxcvpxittzjzuocge"),
+    TXT("@", "sl-verification=mndielvizesnwzptwcyuxsjsopdxmi"),
     TXT("_github-pages-challenge-kiefer-networks", "67d73ff266432fb032ca026238885f")
 );
 
@@ -245,7 +245,7 @@ D("p37.nexus", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
-    TXT("@", "sl-verification=lmkisojozujtptobfophemeyrincms")
+    TXT("@", "sl-verification=purayncdymcavcdbtttmtyhnjlmygq")
 );
 // ---------------------------------------------------------------------------
 // pinlo.me (mail at SimpleLogin)
@@ -267,7 +267,7 @@ D("pinlo.me", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
-    TXT("@", "sl-verification=ucmanmycxksxyjtnceeadtzbpytrac")
+    TXT("@", "sl-verification=vcikipyvslnbqgjvhqudxkbvvaqnod")
 );
 
 // ---------------------------------------------------------------------------
@@ -300,5 +300,5 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
     // TXT
     TXT("@", "v=spf1 include:simplelogin.co ~all"),
     TXT("_dmarc", "v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s"),
-    TXT("@", "sl-verification=itiigdlxhrxgubdzoeqcebebarxmnl")
+    TXT("@", "sl-verification=vwvzdhdyhwbbaelohsyktondiinkpg")
 );
