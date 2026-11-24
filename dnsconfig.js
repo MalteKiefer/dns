@@ -73,10 +73,10 @@ D("lighthouse-bayreuth.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS_TTL,
 
     // Web
-    A("@", "84.200.227.133"),
-    AAAA("@", "2001:1608:23:8:0:1:0:1"),
-    A("www", "84.200.227.133"),
-    AAAA("www", "2001:1608:23:8:0:1:0:1"),
+    A("@", "103.241.50.181"),
+    AAAA("@", "2a0a:51c1:0:29::181"),
+    A("www", "103.241.50.181"),
+    AAAA("www", "2a0a:51c1:0:29::181"),
 
     // Mail (Exchange Online)
     MX("@", 0, "lighthousebayreuth-de02e.mail.protection.outlook.com."),
@@ -100,10 +100,10 @@ D("lighthouse-franken.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS_TTL,
 
     // Web
-    A("@", "84.200.227.133"),
-    AAAA("@", "2001:1608:23:8:0:1:0:1"),
-    A("www", "84.200.227.133"),
-    AAAA("www", "2001:1608:23:8:0:1:0:1"),
+    A("@", "103.241.50.181"),
+    AAAA("@", "2a0a:51c1:0:29::181"),
+    A("www", "103.241.50.181"),
+    AAAA("www", "2a0a:51c1:0:29::181"),
 
     // Mail (Exchange Online)
     MX("@", 0, "lighthousefranken-de02e.mail.protection.outlook.com."),
@@ -129,10 +129,10 @@ D("lighthouse-kirche.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS_TTL,
 
     // Web
-    A("@", "84.200.227.133"),
-    AAAA("@", "2001:1608:23:8:0:1:0:1"),
-    A("www", "84.200.227.133"),
-    AAAA("www", "2001:1608:23:8:0:1:0:1"),
+    A("@", "103.241.50.181"),
+    AAAA("@", "2a0a:51c1:0:29::181"),
+    A("www", "103.241.50.181"),
+    AAAA("www", "2a0a:51c1:0:29::181"),
 
     // Mail (Exchange Online)
     MX("@", 0, "lighthousekirche-de02e.mail.protection.outlook.com."),
@@ -157,10 +157,10 @@ D("lighthouse-kirchen.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS_TTL,
 
     // Web
-    A("@", "84.200.227.133"),
-    AAAA("@", "2001:1608:23:8:0:1:0:1"),
-    A("www", "84.200.227.133"),
-    AAAA("www", "2001:1608:23:8:0:1:0:1"),
+    A("@", "103.241.50.181"),
+    AAAA("@", "2a0a:51c1:0:29::181"),
+    A("www", "103.241.50.181"),
+    AAAA("www", "2a0a:51c1:0:29::181"),
 
     // Mail (Exchange Online)
     MX("@", 0, "lighthousekirchen-de02e.mail.protection.outlook.com."),
@@ -185,10 +185,10 @@ D("lighthouse-kronach.de", REG_INWX, DnsProvider(DSP_DESEC),
     DESEC_NS_TTL,
 
     // Web
-    A("@", "84.200.227.133"),
-    AAAA("@", "2001:1608:23:8:0:1:0:1"),
-    A("www", "84.200.227.133"),
-    AAAA("www", "2001:1608:23:8:0:1:0:1"),
+    A("@", "103.241.50.181"),
+    AAAA("@", "2a0a:51c1:0:29::181"),
+    A("www", "103.241.50.181"),
+    AAAA("www", "2a0a:51c1:0:29::181"),
 
     // Mail (Exchange Online)
     MX("@", 0, "lighthousekronach-de02e.mail.protection.outlook.com."),
