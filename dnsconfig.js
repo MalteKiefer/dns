@@ -35,9 +35,9 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
 
     CNAME("www", "kiefer-networks.github.io."),
 
-    // Mail host
-    A("mail", "2.29.138.139"),
-    AAAA("mail", "2a01:4f9:c015:e215::1"),
+    // MDM host
+    A("mdm", "2.29.138.139"),
+    AAAA("mdm", "2a01:4f9:c015:e215::1"),
 
     // Webmail
     A("webmail", "2.29.138.139"),
