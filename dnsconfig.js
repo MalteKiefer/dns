@@ -375,3 +375,27 @@ D("debgen.org", REG_INWX, DnsProvider(DSP_DESEC),
     SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
     SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
 );
+
+// ---------------------------------------------------------------------------
+// slimrmm.io (mailbox.org domain verification only)
+// ---------------------------------------------------------------------------
+
+D("slimrmm.io", REG_INWX, DnsProvider(DSP_DESEC),
+    DefaultTTL(3600),
+    DESEC_NS_TTL,
+
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "a0e340453f6e126239ef83e9bc51db5d80e41c80")
+);
+
+// ---------------------------------------------------------------------------
+// sshvault.app (mailbox.org domain verification only)
+// ---------------------------------------------------------------------------
+
+D("sshvault.app", REG_INWX, DnsProvider(DSP_DESEC),
+    DefaultTTL(3600),
+    DESEC_NS_TTL,
+
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "12aafb2114d6d6d4865d145c90f65ab3ec04ec8a")
+);
