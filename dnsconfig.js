@@ -43,6 +43,10 @@ D("kiefer-networks.de", REG_INWX, DnsProvider(DSP_DESEC),
     A("docs", "2.29.138.139"),
     AAAA("docs", "2a01:4f9:c015:e215::1"),
 
+    // Photos
+    A("photos", "2.29.138.139"),
+    AAAA("photos", "2a01:4f9:c015:e215::1"),
+
     // Webmail
     A("webmail", "2.29.138.139"),
     AAAA("webmail", "2a01:4f9:c015:e215::1"),
