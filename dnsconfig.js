@@ -489,6 +489,12 @@ D("limdm.com", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@limdm.com; ruf=mailto:dmarc@limdm.com; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@limdm.com"),
 
+    // GitHub Pages docs site
+    CNAME("docs", "maltekiefer.github.io.", TTL(3600)),
+
+    // Only Let's Encrypt may issue certificates for this domain
+    CAA("@", "issue", "letsencrypt.org"),
+
     // mailbox.org domain verification
     TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "31d6b1d4aa4acea8e12be0dca85c2611c48becce"),
 
