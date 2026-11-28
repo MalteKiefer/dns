@@ -460,3 +460,39 @@ D("sshvault.app", REG_INWX, DnsProvider(DSP_DESEC),
     SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
     SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
 );
+
+// ---------------------------------------------------------------------------
+// limdm.com (mail at mailbox.org)
+// ---------------------------------------------------------------------------
+
+D("limdm.com", REG_INWX, DnsProvider(DSP_DESEC),
+    DefaultTTL(3600),
+    DESEC_NS_TTL,
+
+    // Mail (mailbox.org custom domain)
+    MX("@", 10, "mxext1.mailbox.org."),
+    MX("@", 10, "mxext2.mailbox.org."),
+    MX("@", 10, "mxext3.mailbox.org."),
+    MX("@", 10, "mxext4.mailbox.org."),
+
+    // DKIM: mailbox.org holds the keys, the CNAMEs let them rotate without
+    // a DNS change here. Lowercase on purpose - DNS is case-insensitive and
+    // deSEC normalises anyway, so this avoids diff churn.
+    CNAME("mbo0001._domainkey", "mbo0001._domainkey.mailbox.org."),
+    CNAME("mbo0002._domainkey", "mbo0002._domainkey.mailbox.org."),
+    CNAME("mbo0003._domainkey", "mbo0003._domainkey.mailbox.org."),
+    CNAME("mbo0004._domainkey", "mbo0004._domainkey.mailbox.org."),
+
+    // TXT
+    // mailbox.org documents ~all; kept at -all since all outbound goes there.
+    TXT("@", "v=spf1 include:mailbox.org -all"),
+    TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@limdm.com; ruf=mailto:dmarc@limdm.com; fo=1; adkim=s; aspf=s; pct=100"),
+    TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@limdm.com"),
+
+    // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
+    // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
+    // CNAME under this domain would fail TLS validation in the clients.
+    SRV("_autodiscover._tcp", 0, 1, 443, "auto.mailbox.org."),
+    SRV("_imaps._tcp", 0, 1, 993, "imap.mailbox.org."),
+    SRV("_submissions._tcp", 0, 1, 465, "smtp.mailbox.org.")
+);
