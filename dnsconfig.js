@@ -489,6 +489,9 @@ D("limdm.com", REG_INWX, DnsProvider(DSP_DESEC),
     TXT("_dmarc", "v=DMARC1; p=quarantine; rua=mailto:dmarc@limdm.com; ruf=mailto:dmarc@limdm.com; fo=1; adkim=s; aspf=s; pct=100"),
     TXT("_smtp._tls", "v=TLSRPTv1; rua=mailto:tlsrpt@limdm.com"),
 
+    // mailbox.org domain verification
+    TXT("6ae9c48470696c7c52507e8c3ae83e0d888df6c7", "31d6b1d4aa4acea8e12be0dca85c2611c48becce"),
+
     // Client autodiscovery via SRV (RFC 6186). No autoconfig/autodiscover
     // CNAMEs: mailbox.org only has certificates for its own hostnames, so a
     // CNAME under this domain would fail TLS validation in the clients.
